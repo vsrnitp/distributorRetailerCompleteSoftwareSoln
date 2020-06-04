@@ -1,0 +1,94 @@
+<!DOCTYPE html>>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+</head>
+
+
+<body class="container-fluid">
+
+<div class="row">
+
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+
+        <h1 style="text-align: center;">CHECKOUT FORM</h1>
+        
+        <form action="/distributorSell/sell" method="POST">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" class="form-control" name="custName" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Retail customer ID:-</label>
+                <input type="text" class="form-control" name="custRetailId" required>
+              </div>
+              <div class="form-group">
+                <label for="name">Amount (paid):-</label>
+                <input type="number" class="form-control" name="custAmountPaid" required>
+              </div>
+            <div class="form-group">
+              <label for="address">Addresss:</label>
+              <input type="text" class="form-control" name="custAddress" required>
+            </div>
+            <div class="form-group">
+                <label for="mobNo">Mob No.:</label>
+                <input type="number" class="form-control" name="custMobNo">
+              </div>
+              <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" class="form-control" name="custQuantity" required>
+              </div>
+              <div class="form-group">
+                <label for="dateOfSale">Date of Sale:</label>
+                <input type="date" class="form-control" name="custDateOfSell" required>
+              </div>
+              <div class="form-group">
+                <label>Distributor Id:-</label>
+                <input class="form-control" name="clientId" value="<%= dId%>">
+              </div>
+              <div class="form-group">
+                <label>Product Name:-</label>
+                <input class="form-control" name="productName" value="<%= dProductName%>">
+              </div>
+              <div class="form-group">
+                <label>Product Id:-</label>
+                <input class="form-control" name="productId" value="<%= dProductId%>">
+              </div>
+              <div class="form-group">
+                <label>Available Quantity:-</label>
+                <input class="form-control" name="prodctAvailableQuantity" value="<%= dAvailableQuantity%>">
+              </div>
+              <div class="form-group">
+                <label>Net Price:-</label>
+                <input class="form-control" name="netPrice" value="<%= dNetPrice%>">
+              </div>
+              <div class="form-group">
+                <label>Net CGST:-</label>
+                <input class="form-control" name="netCgst" value="<%= dNetCgst%>">
+              </div>
+              <div class="form-group">
+                <label>Net SGST:-</label>
+                <input class="form-control" name="netSgst" value="<%= dNetSgst%>">
+              </div>
+              <div class="form-group">
+                <label>Total Price:-</label>
+                <input class="form-control" name="totalPrice" value="<%= dTotalPrice%>">
+              </div>
+            <button type="submit" class="btn btn-danger">Submit</button>
+          </form>
+
+    </div>
+    <div class="col-sm-3"></div>
+
+</div>
+
+
+
+</body>
+</html>

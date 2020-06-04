@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <style>
+
+        body
+        {
+            counter-reset: Count-Value;     
+        }
+        table
+        {
+            border-collapse: separate;
+        }
+        tr td:first-child:before
+        {
+          counter-increment: Count-Value;   
+          content:  counter(Count-Value);
+        }
+        
+            </style>
+
+</head>
+
+
+<body class="container-fluid">
+<h1 style="text-align: center; font-weight: bolder; color: blueviolet;">Distributor's Dashboard</h1>
+<hr/>
+
+<div class="row">
+
+<div class="col-sm-4">
+ <h6 style="font-weight: bolder;">Welcome <span style="color: crimson;"><%= dEmail%></span></h6>
+ <h6 style="font-weight: bolder;">Distributor Id:- <span style="color: crimson;"><%= dId%></span></h6>
+</div>
+<div class="col-sm-2">
+  <form action="/distributorSaleData/<%= dEmail%>">
+<button class="btn btn-outline-success" >SALE DATA</button>
+</form>
+</div>
+<div class="col-sm-2">
+<form action="/add/retailCustomer/<%= dEmail%>" method="POST">
+  <button class="btn btn-outline-danger" data-toggle="modal" data-target="#myModal2">ADD CUSTOMER</button>
+
+<!-- The Modal -->
+<div class="modal" id="myModal2">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add customer to database</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" name="custName" required>
+        </div>
+        <div class="form-group">
+            <label for="name">Retail customer ID:-</label>
+            <input type="text" class="form-control" name="custRetailId" required>
+          </div>
+          <div class="form-group">
+            <label for="name">Amount (remaining):-</label>
+            <input type="number" class="form-control" name="custAmountRemaining" required>
+          </div>
+        <div class="form-group">
+          <label for="address">Addresss:</label>
+          <input type="text" class="form-control" name="custAddress" required>
+        </div>
+        <div class="form-group">
+            <label for="mobNo">Mob No.:</label>
+            <input type="number" class="form-control" name="custMobNo">
+          </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+</form>
+</div>
+<div class="col-sm-2">
+  <form action="/retailUnpaidBalance/<%= dEmail%>">
+    <button class="btn btn-outline-danger" >UNPAID BALANCE</button>
+    </form>
+</div>
+<div class="col-sm-2">
+
+  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal6">
+    PAY BALANCE
+  </button>
+  
+  <!-- The Modal -->
+  <div class="modal" id="myModal6">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">BILL CLEARANCE</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          
+
+          <form action="/retailBalancePayment/<%= dEmail%>" method="POST">
+            <div class="form-group">
+              <label for="custId">Customer Id:</label>
+              <input type="text" class="form-control" placeholder="Enter customer Id" required name="custIdForBalPayment">
+            </div>
+            <div class="form-group">
+              <label for="payment">Payment:</label>
+              <input type="number" class="form-control" placeholder="Enter payment" required name="paymentByCust">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+</div>
+
+<hr/>
+<div class="row">
+ <div class="col-sm-12" style="text-align: center;">
+    <h1 style="text-align: center; font-weight: bolder; color: darkolivegreen;">STOCK DETAILS</h1>
+<!--creating distributor sales table...-->
+<table class="table table-hover">
+    <thead>
+      <tr>
+          <th>Sereial No.</th>
+        <th>Product Name</th>
+        <th>Product Id</th>
+        <th>Quantity</th>
+        <th>Net Price</th>
+        <th>Net cgst(9%)</th>
+        <th>Net sgst(9%)</th>
+        <th>Net Total Price</th>
+        <th>sell</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+
+        <% dProductInfo.forEach(function( eachData){ %>
+         
+      <tr>
+        <td></td>
+        <td><%= eachData.dProductName%></td>
+        <td><%= eachData.dProductId%></td>
+        <td><%= eachData.dQuantity%></td>
+        <td><%= eachData.dNetPrice%></td>
+        <td><%= eachData.dNetCgst%></td>
+        <td><%= eachData.dNetSgst%></td>
+        <td><%= eachData.dTotalPrice%></td>
+        <td>   <form action="/distributorSell/<%= eachData.dClientId%>/<%= eachData.dProductName%>/<%= eachData.dQuantity%>/<%= eachData.dNetPrice%>/<%= eachData.dNetCgst%>/<%= eachData.dNetSgst%>/<%= eachData.dTotalPrice%>/<%= eachData.dProductId%>"
+            method="GET"> <button class="btn btn-outline-danger">SELL</button> </form></td>
+        
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+ </div>
+</div>
+
+
+<div>
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal5">
+    Generate Bill
+  </button>
+  
+  <!-- The Modal -->
+  <div class="modal" id="myModal5">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Generate Bill</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <form action="/retailGenerateBill/<%= dEmail%>" method="POST">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="retailCustomerId">RetailCustomerId:</label>
+            <input type="text" class="form-control" name="retailCustId1" required>
+          </div>
+          <div class="form-group">
+            <label for="dateOfSale">Date of Sale:</label>
+            <input type="date" class="form-control" name="dateOfSale1" required>
+          </div>
+        </div>
+        <button class="btn btn-outline-success" style="margin-left: 20px; margin-bottom: 5px;">SUBMIT</button>
+          </form>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+       
+            
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+
+</html>
